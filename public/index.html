@@ -1,0 +1,474 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ikuto32 — Portfolio</title>
+  <meta name="description" content="ikuto32 のポートフォリオ。機械学習・画像検索からITインフラまで、手を動かしてつくるエンジニアの制作物とスキルをまとめています。">
+  <link rel="canonical" href="https://portfolio.ikutotest.xyz/">
+  <meta name="theme-color" content="#F2F0EA">
+  <meta name="color-scheme" content="light">
+
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="ikuto32">
+  <meta property="og:title" content="ikuto32 — Portfolio">
+  <meta property="og:description" content="機械学習から基盤まで、手を動かしてつくるエンジニア。">
+  <meta property="og:url" content="https://portfolio.ikutotest.xyz/">
+  <meta property="og:locale" content="ja_JP">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:creator" content="@ikuto32">
+
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&family=JetBrains+Mono:wght@400;500&display=swap">
+  <link rel="stylesheet" href="/assets/css/style.css">
+
+  <!-- 描画前に html.js を付けるため、あえて defer なしで読み込む（数KB） -->
+  <script src="/assets/js/main.js"></script>
+
+  <!-- アニメーション用ライブラリ（バージョン固定・改ざん検知つき）。読み込めなくてもページは基本表示で動く -->
+  <script defer src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/gsap.min.js" integrity="sha384-XmJ9SoHtVOHoQUcKvFAzVXwdkKo1Ie3bhmSoIAkcdsHGaIrVJIkmozyq0FJeb/Ly" crossorigin="anonymous"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/ScrollTrigger.min.js" integrity="sha384-wl5TeDVvOWt30Pbf8aSo2ZrzsOjddu3avOBvHe+p+OhJt9gP6w9YXmDkN5DK2/dF" crossorigin="anonymous"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/lenis@1.3.26/dist/lenis.min.js" integrity="sha384-jqpi9VmOdhyLoLURgjCn7EpnG9BbnHW57ibIZoeaIU+erWDH3k8fQQg0xH2ySjnw" crossorigin="anonymous"></script>
+  <script defer src="/assets/js/rich.js"></script>
+  <!-- Wasm と p5.js（こちらは必要になってから読み込む）を使うインタラクティブ要素 -->
+  <script defer src="/assets/js/lab.js"></script>
+</head>
+<body>
+  <svg class="sprite" aria-hidden="true" focusable="false">
+    <symbol id="i-arrow" viewBox="0 0 24 24">
+      <path d="M6 18 18 6M8 6h10v10" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square"/>
+    </symbol>
+    <symbol id="i-down" viewBox="0 0 24 24">
+      <path d="M12 4v16M5 13l7 7 7-7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square"/>
+    </symbol>
+  </svg>
+
+  <a class="skip" href="#main">本文へスキップ</a>
+
+  <!-- オープニング（JS とアニメーションが有効なときだけ表示される） -->
+  <div class="intro" aria-hidden="true">
+    <span class="intro__name">ikuto32</span>
+    <span class="intro__count" data-intro-count>000</span>
+    <span class="intro__bar"></span>
+  </div>
+
+  <div class="cursor" aria-hidden="true"><span class="cursor__label"></span></div>
+  <div class="progress" aria-hidden="true"></div>
+
+  <header class="header">
+    <a class="header__logo" href="#top">ikuto32</a>
+    <nav class="nav" aria-label="セクション">
+      <a class="nav__link" href="#about">About</a>
+      <a class="nav__link" href="#works">Works</a>
+      <a class="nav__link" href="#skills">Skills</a>
+      <a class="nav__link" href="#links">Links</a>
+    </nav>
+  </header>
+
+  <main id="main">
+    <!-- ============ Hero ============ -->
+    <section class="hero" id="top">
+      <!-- 3D点群（Wasm で計算し、p5.js で描画）。装飾なので読み上げからは外す -->
+      <div class="hero__stage" data-lab="cloud" aria-hidden="true"></div>
+      <ul class="hero__hud label" aria-hidden="true">
+        <li><span class="dot"></span>Point cloud — <span data-cloud-count>0</span> pts</li>
+        <li>WebAssembly + p5.js</li>
+        <li class="hero__hint">Drag to rotate</li>
+      </ul>
+
+      <p class="hero__label label"><span class="dot" aria-hidden="true"></span>Portfolio / 2026</p>
+      <h1 class="hero__title">
+        <span class="sr-only">ikuto32</span>
+        <!-- 2つの行は PC では横に並び、スマホの縦画面では2段に分かれる -->
+        <span class="hero__letters" aria-hidden="true"><span class="hero__line"><span class="hero__letter">i</span><span class="hero__letter">k</span><span class="hero__letter">u</span><span class="hero__letter">t</span><span class="hero__letter">o</span></span><span class="hero__line"><span class="hero__letter">3</span><span class="hero__letter">2</span></span></span>
+      </h1>
+      <div class="hero__foot">
+        <p class="hero__lead">機械学習から基盤まで、<br>手を動かしてつくるエンジニア。</p>
+        <ul class="hero__meta label">
+          <li>Python</li>
+          <li>Machine Learning</li>
+          <li>Infrastructure</li>
+        </ul>
+        <a class="hero__scroll label" href="#about">Scroll<svg class="icon" aria-hidden="true"><use href="#i-down"/></svg></a>
+      </div>
+    </section>
+
+    <!-- ============ 01 About ============ -->
+    <section class="section" id="about" aria-labelledby="about-title">
+      <header class="section__head">
+        <span class="section__num label">01</span>
+        <h2 class="section__title" id="about-title" data-reveal="mask"><span class="mask__in">About</span></h2>
+        <span class="section__note label">自己紹介</span>
+      </header>
+      <div class="rule" data-reveal="rule"></div>
+
+      <div class="about">
+        <p class="about__lead" data-reveal data-fill>AIに惹かれてコードを書きはじめ、いまはそれを支える基盤にも夢中です。</p>
+
+        <div class="about__body" data-stagger>
+          <!-- About 本文：ここを書き換えれば差し替えできます -->
+          <p data-reveal>中学生の頃、インターネットで読んだ論文解説や実験記事をきっかけにAIに興味を持ち、Pythonを書きはじめました。モデルを動かして終わりにせず、データ処理・検索・Web UIまで含めて「実際に使える形」に仕上げることを大切にしています。</p>
+          <p data-reveal>日本大学で電気電子工学を学び、卒業研究では3次元点群データを使ったドローンの認識に取り組みました。あわせて情報処理技術者試験を通じてネットワーク・データベース・セキュリティを体系的に学び、ソフトウェアだけでなく、電源・ネットワーク・ストレージまで含めた基盤全体からシステムを考えるようにしています。</p>
+          <p data-reveal>趣味は自宅サーバーやNAS、ネットワーク環境の改善です。消費電力や室内環境を可視化して、少しずつ整えていく過程を楽しんでいます。キーボードを離れると、セモリナ粉でパスタを生地から打っています。試して、結果を見て、次を直す。開発と同じ面白さがあります。</p>
+
+          <dl class="facts" data-reveal>
+            <div class="facts__row">
+              <dt class="label">Base</dt>
+              <dd>Japan</dd>
+            </div>
+            <div class="facts__row">
+              <dt class="label">Education</dt>
+              <dd>日本大学</dd>
+            </div>
+            <div class="facts__row">
+              <dt class="label">Focus</dt>
+              <dd>機械学習 / 画像検索 / ITインフラ / セキュリティ</dd>
+            </div>
+            <div class="facts__row">
+              <dt class="label">Certifications</dt>
+              <dd>
+                <ul class="facts__list">
+                  <li>情報処理安全確保支援士試験 合格</li>
+                  <li>応用情報技術者試験</li>
+                  <li>基本情報技術者試験</li>
+                  <li>G検定（JDLA Deep Learning for GENERAL）</li>
+                </ul>
+              </dd>
+            </div>
+            <div class="facts__row">
+              <dt class="label">Interests</dt>
+              <dd>自宅サーバー・NAS / ネットワーク / 生パスタ / アニメ</dd>
+            </div>
+          </dl>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ 02 Works ============ -->
+    <section class="section" id="works" aria-labelledby="works-title">
+      <header class="section__head">
+        <span class="section__num label">02</span>
+        <h2 class="section__title" id="works-title" data-reveal="mask"><span class="mask__in">Works</span></h2>
+        <span class="section__note label">GitHub / 6 repositories</span>
+      </header>
+      <div class="rule" data-reveal="rule"></div>
+
+      <ol class="projects">
+        <!-- 01 MyImageSearch -->
+        <li class="project">
+          <figure class="project__media shot" data-cursor="Open">
+            <a class="shot__link" href="https://github.com/ikuto32/MyImageSearch" target="_blank" rel="noopener noreferrer" tabindex="-1" aria-hidden="true"></a>
+            <div class="shot__desktop" data-media>
+              <div class="shot__bar" aria-hidden="true"><i></i><i></i><i></i></div>
+              <div class="shot__view">
+                <img data-parallax src="/assets/img/myimagesearch-desktop.webp" width="1440" height="960" alt="MyImageSearchで「mountains」を検索し、山の写真が一覧表示されている画面" loading="lazy" decoding="async">
+              </div>
+            </div>
+            <div class="shot__mobile" data-float>
+              <img src="/assets/img/myimagesearch-mobile.webp" width="390" height="844" alt="スマホ幅で表示したMyImageSearch" loading="lazy" decoding="async">
+            </div>
+          </figure>
+          <div class="project__body" data-stagger>
+            <span class="project__num label" data-reveal>01 — Web app</span>
+            <h3 class="project__name" data-reveal><a href="https://github.com/ikuto32/MyImageSearch" target="_blank" rel="noopener noreferrer">MyImageSearch</a></h3>
+            <p class="project__desc" data-reveal>言葉や似た画像から、ローカルに保存した画像を探せるWebアプリ。OpenCLIPで画像とテキストを同じ空間のベクトルに変換し、FAISSで近傍検索します。Flask＋SQLiteのバックエンドからVue / VuetifyのUIまで一貫して実装し、300を超えるコミットで改善を続けています。</p>
+            <p class="project__tags label" data-reveal>Python / OpenCLIP / FAISS / Flask / Vue.js — 2022–</p>
+            <a class="project__cta label" data-reveal data-magnetic href="https://github.com/ikuto32/MyImageSearch" target="_blank" rel="noopener noreferrer">GitHub<svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+          </div>
+        </li>
+
+        <!-- 02 super-resolution-gan -->
+        <li class="project project--flip">
+          <figure class="project__media demo" data-lab="pyramid" data-media>
+            <div class="demo__canvas" data-lab-canvas></div>
+            <div class="demo__bar">
+              <div class="demo__group" role="group" aria-label="表示する解像度">
+                <button class="chip" type="button" data-res="1">1</button>
+                <button class="chip" type="button" data-res="2">2</button>
+                <button class="chip" type="button" data-res="4">4</button>
+                <button class="chip" type="button" data-res="8">8</button>
+                <button class="chip" type="button" data-res="16">16</button>
+                <button class="chip" type="button" data-res="32">32</button>
+                <button class="chip" type="button" data-res="64">64</button>
+                <button class="chip" type="button" data-res="128">128</button>
+              </div>
+              <div class="demo__group">
+                <button class="chip" type="button" data-action="auto" aria-pressed="true">Auto</button>
+                <button class="chip" type="button" data-action="reset">Reset</button>
+              </div>
+            </div>
+            <figcaption class="demo__note">
+              画像ピラミッドのイメージ図です（モデルの出力ではありません）。模様はWebAssembly上でGray–Scottモデルをリアルタイムに計算しています。なぞると模様が増え、左右の境界はポインターで動かせます。
+            </figcaption>
+            <p class="demo__fallback">このデモを表示できませんでした。JavaScriptとWebAssemblyが有効で、p5.jsを読み込める環境が必要です。</p>
+          </figure>
+          <div class="project__body" data-stagger>
+            <span class="project__num label" data-reveal>02 — Research code</span>
+            <h3 class="project__name" data-reveal><a href="https://github.com/ikuto32/super-resolution-gan" target="_blank" rel="noopener noreferrer">super-resolution-gan</a></h3>
+            <p class="project__desc" data-reveal>解像度に依存しない超解像GANの研究用コードベース。1×1から目標解像度まで段階的に拡大する生成器と、任意の解像度を評価できる識別器を、R3GAN形式の損失で学習します。EMA・チェックポイント・TensorBoardログと、pytestによるテストも備えています。</p>
+            <p class="project__tags label" data-reveal>Python / PyTorch / GAN — 2026</p>
+            <a class="project__cta label" data-reveal data-magnetic href="https://github.com/ikuto32/super-resolution-gan" target="_blank" rel="noopener noreferrer">GitHub<svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+          </div>
+        </li>
+
+        <!-- 03 font-length -->
+        <li class="project">
+          <figure class="project__media demo" data-lab="thin" data-media>
+            <div class="demo__canvas" data-lab-canvas></div>
+            <div class="demo__bar">
+              <div class="demo__group">
+                <label class="demo__field">
+                  <span class="label">文字</span>
+                  <input class="demo__input" type="text" value="鬱" maxlength="4" autocomplete="off" autocapitalize="off" spellcheck="false" data-thin-input aria-label="細線化する文字（1文字）">
+                </label>
+                <button class="chip" type="button" data-char="鬱">鬱</button>
+                <button class="chip" type="button" data-char="線">線</button>
+                <button class="chip" type="button" data-char="永">永</button>
+                <button class="chip" type="button" data-char="あ">あ</button>
+                <button class="chip" type="button" data-char="&amp;">&amp;</button>
+              </div>
+              <div class="demo__group" role="group" aria-label="書体">
+                <button class="chip" type="button" data-font="sans" aria-pressed="true">ゴシック</button>
+                <button class="chip" type="button" data-font="serif" aria-pressed="false">明朝</button>
+                <button class="chip" type="button" data-action="replay">Replay</button>
+              </div>
+            </div>
+            <dl class="demo__read">
+              <div><dt class="label">Peeled</dt><dd data-thin-iter>0</dd></div>
+              <div><dt class="label">Length</dt><dd data-thin-len>—</dd></div>
+              <div><dt class="label">Ink</dt><dd data-thin-ink>—</dd></div>
+            </dl>
+            <figcaption class="demo__note">
+              font-lengthと同じ考え方をブラウザ内で再現したものです。端末のフォントで描いた文字を、WebAssembly（Zhang–Suen法）で外側から1層ずつ削って芯の線だけにし、その長さを測ります。長さは文字の大きさを1emとした概算です。
+            </figcaption>
+            <p class="demo__fallback">このデモを表示できませんでした。JavaScriptとWebAssemblyが有効で、p5.jsを読み込める環境が必要です。</p>
+          </figure>
+          <div class="project__body" data-stagger>
+            <span class="project__num label" data-reveal>03 — Tool</span>
+            <h3 class="project__name" data-reveal><a href="https://github.com/ikuto32/font-length" target="_blank" rel="noopener noreferrer">font-length</a></h3>
+            <p class="project__desc" data-reveal>フォントの字形を細線化して単線のSVGに変換し、線の総延長を測るツール。常用漢字すべてを対象に「いちばん線が長い字はどれか」を計算できます。「鬱」1文字を測るチュートリアル付き。</p>
+            <p class="project__tags label" data-reveal>Python / Pillow / scikit-image — 2025</p>
+            <a class="project__cta label" data-reveal data-magnetic href="https://github.com/ikuto32/font-length" target="_blank" rel="noopener noreferrer">GitHub<svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+          </div>
+        </li>
+
+        <!-- 04 MV_test -->
+        <li class="project project--wide">
+          <div class="project__body" data-stagger>
+            <span class="project__num label" data-reveal>04 — Motion graphics</span>
+            <h3 class="project__name" data-reveal><a href="https://github.com/ikuto32/MV_test" target="_blank" rel="noopener noreferrer">MV_test</a></h3>
+            <p class="project__desc" data-reveal>映像も音もすべてコードから生成した、60秒のモーショングラフィックスMV 4本。p5.js・GLSL・three.js・Manimで描き、音楽はPython（numpy / scipy）で合成しています。コードはClaudeに指示を出しながら制作しました。</p>
+            <p class="project__tags label" data-reveal>JavaScript / p5.js / GLSL / three.js / Python — 2026</p>
+            <a class="project__cta label" data-reveal data-magnetic href="https://github.com/ikuto32/MV_test" target="_blank" rel="noopener noreferrer">GitHub<svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+          </div>
+
+          <!-- 横に並ぶ4本。PC ではスクロールに合わせて横へ流れ、スマホでは横スワイプ -->
+          <div class="films" data-films tabindex="0" role="group" aria-label="MV_test の4本の映像（横にスクロール）">
+            <div class="films__track">
+              <article class="film">
+                <div class="film__media">
+                  <video class="film__video" muted loop playsinline preload="none" width="960" height="540" poster="/assets/img/mv/ten-sen-men.webp" aria-label="「点・線・面」の抜粋映像（音声なし）">
+                    <source src="/assets/video/ten-sen-men.mp4" type="video/mp4">
+                  </video>
+                </div>
+                <div class="film__meta">
+                  <span class="film__num label">01 / 04</span>
+                  <h4 class="film__title">点・線・面</h4>
+                  <p class="film__en label">Ten · Sen · Men</p>
+                  <p class="film__theme">点、線、面。漢字を一画ずつ書いていく。</p>
+                </div>
+              </article>
+              <article class="film">
+                <div class="film__media">
+                  <video class="film__video" muted loop playsinline preload="none" width="960" height="540" poster="/assets/img/mv/koushi-gun.webp" aria-label="「格子と群」の抜粋映像（音声なし）">
+                    <source src="/assets/video/koushi-gun.mp4" type="video/mp4">
+                  </video>
+                </div>
+                <div class="film__meta">
+                  <span class="film__num label">02 / 04</span>
+                  <h4 class="film__title">格子と群</h4>
+                  <p class="film__en label">Grids &amp; Groups</p>
+                  <p class="film__theme">格子、17種の壁紙群、調和関数と楕円関数。</p>
+                </div>
+              </article>
+              <article class="film">
+                <div class="film__media">
+                  <video class="film__video" muted loop playsinline preload="none" width="960" height="540" poster="/assets/img/mv/jiko-soji.webp" aria-label="「自己相似」の抜粋映像（音声なし）">
+                    <source src="/assets/video/jiko-soji.mp4" type="video/mp4">
+                  </video>
+                </div>
+                <div class="film__meta">
+                  <span class="film__num label">03 / 04</span>
+                  <h4 class="film__title">自己相似</h4>
+                  <p class="film__en label">Self-similar</p>
+                  <p class="film__theme">フラクタルと空間充填曲線、L-system、タイリング。</p>
+                </div>
+              </article>
+              <article class="film">
+                <div class="film__media">
+                  <video class="film__video" muted loop playsinline preload="none" width="960" height="540" poster="/assets/img/mv/bibun-houteishiki.webp" aria-label="「微分方程式」の抜粋映像（音声なし）">
+                    <source src="/assets/video/bibun-houteishiki.mp4" type="video/mp4">
+                  </video>
+                </div>
+                <div class="film__meta">
+                  <span class="film__num label">04 / 04</span>
+                  <h4 class="film__title">微分方程式</h4>
+                  <p class="film__en label">Rate of change</p>
+                  <p class="film__theme">同期、チューリングパターン、自己集合、カオス。</p>
+                </div>
+              </article>
+            </div>
+          </div>
+        </li>
+      </ol>
+
+      <h3 class="subhead label" data-reveal><span class="dot" aria-hidden="true"></span>Forks — 既存プロジェクトへの機能追加</h3>
+      <ol class="works works--fork" start="5">
+        <li class="work" data-reveal>
+          <a class="work__link" data-cursor="Open" href="https://github.com/ikuto32/prometheus-exporter-alternative" target="_blank" rel="noopener noreferrer">
+            <span class="work__num label">05</span>
+            <h4 class="work__name">prometheus-exporter-alternative</h4>
+            <span class="work__detail">
+              <span class="work__desc">Prometheus Exporterの.NET実装のフォーク。Linux（BlueZ）でSwitchBotの温湿度計・CO2センサー・Hub 3のBLEアドバタイズを読み取り、メトリクスとして出力できるように拡張しました。</span>
+              <span class="work__tags label">C# / .NET / Bluetooth LE — Fork of usausa/prometheus-exporter-alternative</span>
+            </span>
+            <svg class="work__arrow icon" aria-hidden="true"><use href="#i-arrow"/></svg>
+          </a>
+        </li>
+        <li class="work" data-reveal>
+          <a class="work__link" data-cursor="Open" href="https://github.com/ikuto32/nxbt" target="_blank" rel="noopener noreferrer">
+            <span class="work__num label">06</span>
+            <h4 class="work__name">nxbt</h4>
+            <span class="work__detail">
+              <span class="work__desc">Nintendo SwitchをWeb・ターミナル・マクロから操作するツールのフォーク。Switch 2とのペアリング対応、Webコントローラーの安定化、マクロの可視化と中断機能を追加しました。</span>
+              <span class="work__tags label">Python / Bluetooth — Fork of Brikwerk/nxbt</span>
+            </span>
+            <svg class="work__arrow icon" aria-hidden="true"><use href="#i-arrow"/></svg>
+          </a>
+        </li>
+      </ol>
+    </section>
+
+    <!-- ============ 03 Skills ============ -->
+    <section class="section" id="skills" aria-labelledby="skills-title">
+      <header class="section__head">
+        <span class="section__num label">03</span>
+        <h2 class="section__title" id="skills-title" data-reveal="mask"><span class="mask__in">Skills</span></h2>
+        <span class="section__note label">リポジトリで使っている技術</span>
+      </header>
+      <div class="rule" data-reveal="rule"></div>
+
+      <!-- 装飾用の帯。内容は下のリストと同じなので読み上げからは外す -->
+      <div class="marquee" aria-hidden="true">
+        <div class="marquee__track">
+          <span>Python</span><span>PyTorch</span><span>OpenCLIP</span><span>FAISS</span><span>Flask</span><span>SQLite</span><span>Vue.js</span><span>JavaScript</span>
+        </div>
+        <div class="marquee__track marquee__track--reverse">
+          <span>p5.js</span><span>GLSL</span><span>three.js</span><span>Manim</span><span>C#</span><span>.NET</span><span>Prometheus</span><span>Linux</span>
+        </div>
+      </div>
+
+      <div class="skills" data-stagger>
+        <div class="skills__group" data-reveal>
+          <h3 class="label">Languages</h3>
+          <ul>
+            <li>Python</li>
+            <li>JavaScript</li>
+            <li>C#</li>
+            <li>HTML / CSS</li>
+            <li>GLSL</li>
+          </ul>
+        </div>
+        <div class="skills__group" data-reveal>
+          <h3 class="label">Machine Learning</h3>
+          <ul>
+            <li>PyTorch</li>
+            <li>OpenCLIP</li>
+            <li>FAISS</li>
+            <li>GAN（R3GAN）</li>
+            <li>ONNX Runtime</li>
+            <li>NumPy / SciPy</li>
+            <li>scikit-image</li>
+          </ul>
+        </div>
+        <div class="skills__group" data-reveal>
+          <h3 class="label">Web</h3>
+          <ul>
+            <li>Flask</li>
+            <li>SQLite</li>
+            <li>Vue.js</li>
+            <li>Vuetify</li>
+            <li>REST API</li>
+          </ul>
+        </div>
+        <div class="skills__group" data-reveal>
+          <h3 class="label">Creative Coding</h3>
+          <ul>
+            <li>p5.js</li>
+            <li>three.js</li>
+            <li>Manim</li>
+            <li>Playwright</li>
+          </ul>
+        </div>
+        <div class="skills__group" data-reveal>
+          <h3 class="label">Tools / Infra</h3>
+          <ul>
+            <li>Git / GitHub</li>
+            <li>uv / pytest</li>
+            <li>.NET</li>
+            <li>Prometheus</li>
+            <li>Bluetooth LE（BlueZ）</li>
+            <li>Linux</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ 04 Links ============ -->
+    <section class="section" id="links" aria-labelledby="links-title">
+      <header class="section__head">
+        <span class="section__num label">04</span>
+        <h2 class="section__title" id="links-title" data-reveal="mask"><span class="mask__in">Links</span></h2>
+        <span class="section__note label">Find me on</span>
+      </header>
+      <div class="rule" data-reveal="rule"></div>
+
+      <ul class="links">
+        <li data-reveal>
+          <a class="link" data-cursor="Open" href="https://github.com/ikuto32" target="_blank" rel="me noopener noreferrer">
+            <span class="link__name">GitHub</span>
+            <span class="link__handle label">@ikuto32</span>
+            <svg class="link__arrow icon" aria-hidden="true"><use href="#i-arrow"/></svg>
+          </a>
+        </li>
+        <li data-reveal>
+          <a class="link" data-cursor="Open" href="https://x.com/ikuto32" target="_blank" rel="me noopener noreferrer">
+            <span class="link__name">X</span>
+            <span class="link__handle label">@ikuto32</span>
+            <svg class="link__arrow icon" aria-hidden="true"><use href="#i-arrow"/></svg>
+          </a>
+        </li>
+        <li data-reveal>
+          <a class="link" data-cursor="Open" href="https://www.youtube.com/@ikuyari6428" target="_blank" rel="me noopener noreferrer">
+            <span class="link__name">YouTube</span>
+            <span class="link__handle label">@ikuyari6428</span>
+            <svg class="link__arrow icon" aria-hidden="true"><use href="#i-arrow"/></svg>
+          </a>
+        </li>
+      </ul>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <p class="footer__mark" aria-hidden="true">ikuto32</p>
+    <div class="footer__row">
+      <p class="label">© 2026 ikuto32</p>
+      <p class="label">HTML / CSS / JS + Rust (Wasm) — GSAP · Lenis · p5.js — Cloudflare Workers</p>
+      <a class="footer__top label" href="#top">Back to top</a>
+    </div>
+  </footer>
+</body>
+</html>

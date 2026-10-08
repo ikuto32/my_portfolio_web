@@ -1,0 +1,18 @@
+{
+  // Cloudflare Workers（静的アセットのみ。Worker スクリプトなし）
+  "name": "my-portfolio-web",
+  "compatibility_date": "2026-10-08",
+
+  "assets": {
+    // 配信されるのはこのフォルダの中身だけ
+    "directory": "./public",
+    "html_handling": "auto-trailing-slash",
+    "not_found_handling": "404-page"
+  },
+
+  "routes": [
+    { "pattern": "portfolio.ikutotest.xyz", "custom_domain": true }
+  ],
+
+  "workers_dev": true
+}

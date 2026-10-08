@@ -1,0 +1,16 @@
+# Cloudflare Workers の静的アセット用ヘッダー設定
+# https://developers.cloudflare.com/workers/static-assets/headers/
+#
+# CSP の方針
+#   script-src   自サイト + jsDelivr（GSAP / Lenis / p5.js。HTML 側でバージョン固定と integrity を指定）
+#                'wasm-unsafe-eval' は WebAssembly（/assets/wasm/lab.wasm）の実行に必要
+#   style-src    自サイト + Google Fonts。インラインの <style> と style="" は不可
+#   connect-src  lab.wasm の fetch 用
+# 読み込み元を増やすときは、ここも合わせて更新すること。
+
+/*
+  X-Content-Type-Options: nosniff
+  X-Frame-Options: DENY
+  Referrer-Policy: strict-origin-when-cross-origin
+  Permissions-Policy: camera=(), microphone=(), geolocation=()
+  Content-Security-Policy: default-src 'none'; script-src 'self' 'wasm-unsafe-eval' https://cdn.jsdelivr.net; style-src 'self' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; media-src 'self'; connect-src 'self'; base-uri 'none'; form-action 'none'; frame-ancestors 'none'
