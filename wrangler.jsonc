@@ -14,5 +14,7 @@
     { "pattern": "portfolio.ikutotest.xyz", "custom_domain": true }
   ],
 
-  "workers_dev": true
+  // 公開するのはカスタムドメインだけ。*.workers.dev とプレビュー用 URL は出さない
+  "workers_dev": false,
+  "preview_urls": false
 }
