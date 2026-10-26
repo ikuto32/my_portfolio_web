@@ -97,6 +97,20 @@
     });
   }
 
+  // 2枚の画像の境界をスライダーの値に合わせる（CSSOM 経由なので CSP の style-src に掛からない）
+  function setupCompare() {
+    document.querySelectorAll('[data-compare]').forEach(function (figure) {
+      var view = figure.querySelector('.compare__view');
+      var range = figure.querySelector('.compare__range');
+      if (!view || !range) return;
+      function update() {
+        view.style.setProperty('--pos', range.value + '%');
+      }
+      range.addEventListener('input', update);
+      update();
+    });
+  }
+
   /* ---------- 基本表示（GSAP なし） ---------- */
 
   // data-stagger の子要素を少しずつ遅らせる（CSSOM 経由なので CSP の style-src に掛からない）
@@ -155,6 +169,7 @@
 
     highlightCurrentNav();
     setupVideos();
+    setupCompare();
     loopMarquee();
 
     var canBeRich = !reduceMotion && window.gsap && window.ScrollTrigger && typeof window.__rich === 'function';

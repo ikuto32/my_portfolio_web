@@ -103,4 +103,4 @@ Hero の `ikuto32` は、文字幅から逆算したフォントサイズで画�
 | [p5.js](https://p5js.org/) 1.11.13 | LGPL-2.1 | jsDelivr（無改変） |
 | Archivo / JetBrains Mono | SIL OFL 1.1 | Google Fonts |
 
-スクリーンショットと映像は、自分のリポジトリ（[MyImageSearch](https://github.com/ikuto32/MyImageSearch)、[MV_test](https://github.com/ikuto32/MV_test)）から切り出したものです。
+スクリーンショット・写真・映像は、自分のリポジトリ（[MyImageSearch](https://github.com/ikuto32/MyImageSearch)、[japan-1to1-minecraft](https://github.com/ikuto32/japan-1to1-minecraft)、[starstack](https://github.com/ikuto32/starstack)、[MV_test](https://github.com/ikuto32/MV_test)）から切り出したものです。`public/assets/img/japan/shizuoka-aerial.webp` は国土地理院の地理院タイル（全国最新写真・シームレス）で、ページに出典を記載しています。
